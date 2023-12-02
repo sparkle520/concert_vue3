@@ -12,6 +12,7 @@ onMounted(() => {
     window.scrollTo(0,0)
     const film_box_list = document.querySelectorAll('.film_box div')
     film_box_list[0].classList.add('left_btn_doc_limit')
+
 })
 const click_enter_film = ()=>{
     router.push('/concert/film/details')
@@ -156,7 +157,7 @@ watch(current_film_pos, (newV, oldV) => {
 <style lang="scss" scoped>
 #main {
     width: 100vw;
-    background: #133;
+    background: #030202;
     .top_box {
 		width: 100vw;
 		height: 600px;
@@ -234,7 +235,6 @@ watch(current_film_pos, (newV, oldV) => {
 	.film_top{
         width: 100vw;
         height: 60px;
-        background: linear-gradient(45deg,rgb(40, 42, 44),#242221);
         div{
             font-size: 20px;
             color: #dbdbdb;
@@ -265,7 +265,8 @@ watch(current_film_pos, (newV, oldV) => {
     .film_box{
         width: 100%;
         height: 430px;
-        background: linear-gradient(45deg,rgb(40, 42, 44),#242221);
+        margin-bottom: 20px;
+
         .left_btn_doc {
 			width: 7%;
 			height: 530px;

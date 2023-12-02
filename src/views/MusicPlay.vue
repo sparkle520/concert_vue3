@@ -1,4 +1,4 @@
-<!-- @Author: LT -->
+@Author: LT
 <!-- @Date: 2023-11-29 18:18:27 -->
 <!-- @Description:  -->
 
@@ -14,8 +14,6 @@ onMounted(() => {
     music_audio.addEventListener('timeupdate', music_update)
     volume_circle.style.bottom = 35 + music_audio.volume * 80 + 'px'
     volume_circle.addEventListener('mousedown', down_volume_circle)
-    window.addEventListener('mousemove', window_mousemove)
-    window.addEventListener('mouseup', window_up)
     window.addEventListener('mousedown', window_down)
     init()
 })
@@ -23,15 +21,15 @@ onUnmounted(() => {
 
     clearInterval(interval_music_name_loop)
     window.removeEventListener('mousemove', window_mousemove)
-    window.removeEventListener('mouseup', window_up)
-    window.removeEventListener('mousedown', window_down)
+
 
 })
 const window_up = () => {
     volume_flag.value = false
     const volume_btn = document.querySelector('.volume_btn')
     volume_btn.classList.remove('volume_btn_active')
-    show_volume_bar.value = false
+    window.removeEventListener('mouseup', window_up)
+    window.removeEventListener('mousedown', window_down)
 }
 const window_down = (e) => {
     window_y = e.clientY
@@ -48,13 +46,13 @@ const album = ref({
         { musicName: 'Violin Concerto No.5 In A, K.219：3. Rondeau (Tempo di minuetto)', musicUrl: '/src/assets/music/Hilary Hahn - Violin Concerto No.5 In A, K.219：3. Rondeau (Tempo di minuetto).flac', musicDuration: '', player: 'Hilary Hahn' },
     ]
 })
-const init = ()=>{
+const init = () => {
     const item_list = document.querySelectorAll('.list li')
     item_list[pre_list_item.value].classList.remove('list_item')
     item_list[pre_list_item.value].classList.add('list_item_active')
 }
-const switch_list_item_active =(index)=>{
-    if(index === pre_list_item.value){
+const switch_list_item_active = (index) => {
+    if (index === pre_list_item.value) {
         return
     }
     const item_list = document.querySelectorAll('.list li')
@@ -154,7 +152,7 @@ const next_play = () => {
     } else {
         if (current_play.value.currentMusicDataNo >= album.value.musicData.length - 1) {
             current_play.value.currentMusicDataNo = 0
-        }else{
+        } else {
             current_play.value.currentMusicDataNo++
         }
     }
@@ -260,7 +258,7 @@ const switch_show_volume = (status) => {
     }
 }
 const change_volume = (e) => {
-    // console.log(e.offsetY);
+    console.log(e.offsetY);
     if (e.offsetY >= 80) {
         is_silence.value = true
     } else {
@@ -288,10 +286,11 @@ const current_music_name_position = ref(0)
 const show_volume_bar = ref(false)
 const window_mousemove = (e) => {
     if (volume_flag.value) {
+        window.addEventListener('mouseup', window_up)
+
         const volume_btn_svg_path = document.querySelector('.volume_btn svg path')
         volume_btn_svg_path.color = 'antiquewhite'
-        let y_move = (window_y - e.clientY) / 10
-        console.log(y_move);
+        let y_move = (window_y - e.clientY) / 20
         const volume_circle = document.querySelector('.volume_circle')
         if (parseInt(volume_circle.style.bottom) + y_move > 50 && parseInt(volume_circle.style.bottom) + y_move < 130) {
             is_silence.value = false
@@ -314,11 +313,13 @@ const down_volume_circle = (e) => {
     const volume_btn = document.querySelector('.volume_btn')
     volume_btn.classList.add('volume_btn_active')
     volume_flag.value = true
+    window.addEventListener('mousemove', window_mousemove)
+
 }
 const mouse_up_volume_circle = () => {
     volume_flag.value = false
 }
-const switch_current_play = (index) =>{
+const switch_current_play = (index) => {
     is_play.value = true
     current_play.value.currentMusicDataNo = index
     current_music_name_position.value = 0
@@ -345,7 +346,8 @@ const pre_list_item = ref(0)
                 </div>
                 <div class="list_box flex flex-direction-column">
                     <ul class="list">
-                        <li @click="switch_current_play(index)" v-for="(item, index) in album.musicData" class="list_item relative">
+                        <li @click="switch_current_play(index)" v-for="(item, index) in album.musicData"
+                            class="list_item relative">
                             {{ item.musicName }}
                         </li>
                     </ul>
@@ -551,7 +553,7 @@ const pre_list_item = ref(0)
                         &:hover {
                             background: #0d205f0d;
 
-                          
+
                         }
 
                         &::after {
@@ -575,6 +577,7 @@ const pre_list_item = ref(0)
                         font-weight: 600;
                         border-radius: 5px;
                         color: rgb(40, 58, 77);
+
                         &:hover {
                             color: #fd4800;
                             background: #0d205f0d;
@@ -638,16 +641,43 @@ const pre_list_item = ref(0)
                     border-radius: 3px;
                     top: 50%;
                     transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
-
+                    overflow: hidden;
                     transform: translate(-60%, -50%);
                     box-shadow: #123 2px 3px 10px;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 100px;
+                        height: 400px;
+                        right: 0;
+                        top: -120px;
+                        transform: rotate(-45deg);
+                        background: #4465877b;
+                        transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+                    }
+
+                    &:hover {
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 70px;
+                            right: 200px;
+                            right: 0;
+                            top: -120px;
+                            transform: rotate(-45deg);
+                            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+                            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.354), transparent);
+                            animation: album_img_cover 2s alternate;
+                        }
+                    }
 
                     img {
                         width: inherit;
                         height: inherit;
                         object-fit: cover;
                         border-radius: inherit;
-
                     }
                 }
 
@@ -853,7 +883,6 @@ const pre_list_item = ref(0)
                     svg {
                         path {
                             fill: antiquewhite;
-
                         }
                     }
                 }
@@ -986,7 +1015,7 @@ const pre_list_item = ref(0)
                         border-radius: 50%;
                         left: 50%;
                         transform: translateX(-50%);
-                        transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
+                        transition: bottom 1s cubic-bezier(0.23, 1, 0.320, 1);
                         z-index: 100;
                         bottom: 50px;
                         animation: volume_circle 1s linear;
@@ -1100,5 +1129,22 @@ const pre_list_item = ref(0)
 @keyframes music_name {
     0% {
         filter: blur(10px);
+    }
+}
+
+@keyframes album_img_cover {
+    0% {
+        top: -120px;
+        right: 0;
+    }
+
+    50% {
+        top: 70px;
+        right: 200px;
+    }
+
+    60% {
+        top: -180px;
+        right: -100px;
     }
 }</style>

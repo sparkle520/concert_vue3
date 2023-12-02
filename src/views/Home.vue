@@ -939,7 +939,7 @@ const conduct_cycle_position = ref(0)
 .musician_out_box {
 	width: 100vw;
 	min-height: 400px;
-	background-color: #ada8a8;
+	background-color: #ffffff;
 .musician_title{
 	font-size: 24px;
 	color: #713535;

@@ -13,7 +13,6 @@ const show_performance_details = (index) => {
         icon_list[index].style.transform = 'rotate(90deg)'
     } else {
         icon_list[index].style.transform = 'rotate(0deg)'
-
     }
 }
 onBeforeMount(() => {
@@ -21,7 +20,6 @@ onBeforeMount(() => {
 onMounted(() => {
     init_duration()
     window.scrollTo(0,100)
-
 })
 const init_duration = () => {
     for (let i = 0; i < film_recent_program.value.length; ++i) {

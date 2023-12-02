@@ -32,11 +32,15 @@ const scroll_navbar = () => {
 const init_nav_active = () => {
 	const active_item_list = document.querySelectorAll('#nav_list li')
 
-	active_item_list[0].classList.add('nav_item_active')
+	active_item_list[pre_item.value].classList.add('nav_item_active')
 	}
 	
 
 const click_nav_item = (index) => {
+	if(index === pre_item.value)
+	{
+		return
+	}
 	const active_item_list = document.querySelectorAll('#nav_list li')
 	active_item_list[index].classList.add('nav_item_active')
 	active_item_list[pre_item.value].classList.remove('nav_item_active')
@@ -68,7 +72,7 @@ const pre_item =ref(0)
 			<div class="flex flex-direction-row logo_info ">
 				<img class="logo" src="@/assets/imgs/shimmer_logo.png">
 				<div class="logo_detail">
-					Shimmer Philharmonic
+					Sparkle  Philharmoniker
 					<div class="logo_detail_t">
 						Hearing the Silence</div>
 				</div>

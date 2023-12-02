@@ -10,6 +10,7 @@ onBeforeMount(() => {
 })
 onUnmounted(()=>{
     clearInterval(interval_cycle_scroll)
+    video.removeEventListener('timeupdate',timeupdate_video)
 
 })
 onMounted(() => {

@@ -8,24 +8,78 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 onBeforeMount(() => {
 })
-onUnmounted(()=>{
+onUnmounted(() => {
     clearInterval(interval_cycle_scroll)
+    video.removeEventListener('timeupdate', timeupdate_video)
+
 })
 onMounted(() => {
     pre_active_play_node.value = document.querySelectorAll('.program_item span')[0]
 
     pre_active_play_node.value.className = 'performance_details_item_active'
     document.querySelectorAll('.recommend_box div')[0].classList.add('left_btn_doc_limit')
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
+    const video = document.querySelector('.video')
+    video.addEventListener('timeupdate', timeupdate_video)
 
 })
+const timeupdate_video = (e) => {
+    if (e.target.duration - e.target.currentTime < 0.5) {
+        if (current_main + 1 > current_program.value.performanceDetails.length - 1) {
+            current_main = 0
+            current_branch = 0
+            pre_active_play_node.value = document.querySelectorAll('.program_item span')[0]
 
+            program_paly(current_main, current_branch)
+            return
+        } else {
+            current_main++
+            current_branch = 0
+            program_paly(current_main, current_branch)
+            return
+        }
+    }
+    if ((current_branch + 1) > current_program.value.performanceDetails.length - 1) {
+    } else {
+        let [next_min, next_sec] = current_program.value.performanceDetails[current_branch + 1].sectionTimePosition.split('.')
+        let next_time_position = parseFloat(next_min * 60) + parseFloat(next_sec)
+        if (e.target.currentTime > next_time_position) {
+            current_branch += 1
+            pre_active_play_node.value.className = 'performance_details_item'
+            let current_active_node_position = 0
+            for (let i = 0; i < current_main; ++i) {
+                current_active_node_position += program_data.value[i].performanceDetails.length
+            }
+            current_active_node_position += current_branch
+            pre_active_play_node.value = document.querySelectorAll('.program_item span')[current_active_node_position]
+            pre_active_play_node.value.className = 'performance_details_item_active'
+            return
+        }
+    }
+    let [cur_min, cur_sec] = current_program.value.performanceDetails[current_branch].sectionTimePosition.split('.')
+    let cur_time_position = parseFloat(cur_min * 60) + parseFloat(cur_sec)
+    if (e.target.currentTime < cur_time_position) {
+        current_branch -= 1
+        pre_active_play_node.value.className = 'performance_details_item'
+        let current_active_node_position = 0
+        for (let i = 0; i < current_main; ++i) {
+            current_active_node_position += program_data.value[i].performanceDetails.length
+        }
+        current_active_node_position += current_branch
+        pre_active_play_node.value = document.querySelectorAll('.program_item span')[current_active_node_position]
+        pre_active_play_node.value.className = 'performance_details_item_active'
+        return
+    }
+}
+const update_pre_active_play_node = (pre, cur) => {
+
+}
 const program_paly = (main, branch) => {
     if (program_data.value[main] != undefined || program_data.value[main] != null) {
         current_program.value = program_data.value[main]
     }
     pre_active_play_node.value.className = 'performance_details_item'
-    let current_active_node_position = 0;
+    let current_active_node_position = 0
     for (let i = 0; i < main; ++i) {
         current_active_node_position += program_data.value[i].performanceDetails.length
     }
@@ -39,10 +93,13 @@ const program_paly = (main, branch) => {
     jump_time += parseFloat(program_data.value[main].performanceDetails[branch].sectionTimePosition.split('.')[0]) * 60 + parseFloat(program_data.value[main].performanceDetails[branch].sectionTimePosition.split('.')[1])
     nextTick(() => {
         video.currentTime = jump_time
-
+        video.play()
     })
-
+    current_main = main
+    current_branch = branch
 }
+let current_branch = 0
+let current_main = 0
 const cycle_scroll = () => {
     const recommend_container_inner = document.querySelector('.recommend_container_inner')
     if (current_recommend_pos.value <= -4800) {
@@ -302,7 +359,7 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
                     opacity: 1;
                     z-index: -1;
 
-                    background:linear-gradient(to right, #ecbc92, #b8b0b0);
+                    background: linear-gradient(to right, #ecbc92, #b8b0b0);
                     position: absolute;
                     left: 0;
                     bottom: -17px;
@@ -598,4 +655,5 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
     100% {
         opacity: 1;
     }
-}</style>
+}
+</style>

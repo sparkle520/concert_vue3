@@ -57,8 +57,8 @@ const concert_recent_program = ref([
         performancePhilharmonic: 'Lucerne Festival Orchestra ( 琉森音乐节管弦乐团 )',
         performanceDetails: [
             { sectionName: ' I. Allegro energico, ma non troppo', sectionDuration: '21', path: '' },
-            { sectionName: ' II. Wuchtig', sectionDuration: '16', path: '' },
-            { sectionName: ' III. Andante moderato', sectionDuration: '14', path: '' },
+            { sectionName: ' II. Andante moderato', sectionDuration: '16', path: '' },
+            { sectionName: ' III. Scherzo ', sectionDuration: '14', path: '' },
             { sectionName: '  IV. Finale', sectionDuration: '32', path: '' },
         ],
         showPerformanceDetails: ref(false)

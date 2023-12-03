@@ -36,14 +36,17 @@ const window_down = (e) => {
 }
 let window_y = 0
 const album = ref({
-    albumName: 'Mozart: Violin Concerto No. 5',
-    albumImgUrl: '/src/assets/imgs/music_play_bg.png',
+    albumName: 'Mozart: Violin Concerto No. 5 & Sibelius: Violin Concerto, Op. 47',
+    albumImgUrl: '/src/assets/imgs/album_9.jpg',
     albumDate: '2099.09.09',
     albumInfo: '简介:nothing',
     musicData: [
         { musicName: 'Violin Concerto No.5 In A, K.219：1. Allegro aperto', musicUrl: '/src/assets/music/Hilary Hahn - Violin Concerto No.5 In A, K.219：1. Allegro aperto.flac', musicDuration: '', player: 'Hilary Hahn' },
         { musicName: 'Violin Concerto No.5 In A, K.219：2. Adagio', musicUrl: '/src/assets/music/Hilary Hahn - Violin Concerto No.5 In A, K.219：2. Adagio.flac', musicDuration: '', player: 'Hilary Hahn' },
         { musicName: 'Violin Concerto No.5 In A, K.219：3. Rondeau (Tempo di minuetto)', musicUrl: '/src/assets/music/Hilary Hahn - Violin Concerto No.5 In A, K.219：3. Rondeau (Tempo di minuetto).flac', musicDuration: '', player: 'Hilary Hahn' },
+        { musicName: 'Violin Concerto In D Minor Op.47:1. Allegro moderato',musicUrl:'/src/assets/music/Swedish Radio Symphony Orchestra,Hilary Hahn,Esa-Pekka Salonen - Violin Concerto In D Minor Op.47：1. Allegro moderato.flac' , musicDuration: '', player: 'Hilary Hahn' },
+        { musicName: 'Violin Concerto In D Minor Op.47:2. Adagio di molto', musicUrl: '/src/assets/music/Swedish Radio Symphony Orchestra,Hilary Hahn,Esa-Pekka Salonen - Violin Concerto In D Minor Op.47：2. Adagio di molto.flac', musicDuration: '', player: 'Hilary Hahn' },
+        { musicName: 'Violin Concerto In D Minor Op.47:3. Allegro ma non tanto', musicUrl:'/src/assets/music/Swedish Radio Symphony Orchestra,Hilary Hahn,Esa-Pekka Salonen - Violin Concerto In D Minor Op.47：3. Allegro ma non tanto.flac',musicDuration: '', player: 'Hilary Hahn' },
     ]
 })
 const init = () => {
@@ -341,8 +344,11 @@ const pre_list_item = ref(0)
 
         <div class="top_box flex flex-direction-row">
             <div class="top_left_box flex flex-direction-column">
-                <div class="undone">
+                <div class="undone flex align-items-center">
+                    <span>
+                        暂无歌词~
 
+                    </span>
                 </div>
                 <div class="list_box flex flex-direction-column">
                     <ul class="list">
@@ -498,7 +504,7 @@ const pre_list_item = ref(0)
     .top_box {
         width: 88vw;
         height: calc(100vh - 140px);
-        background: rgba(240, 233, 233, 0.233);
+        background: rgba(255, 255, 255, 0.623);
         z-index: 100;
         box-shadow: #6c7075 2px 6px 10px;
         border-radius: 10px;
@@ -508,7 +514,7 @@ const pre_list_item = ref(0)
         .top_left_box {
             width: 60vw;
             height: calc(100vh - 160px);
-            background: #d6ffff34;
+            background: #ffffff34;
             border-radius: inherit;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -518,15 +524,21 @@ const pre_list_item = ref(0)
             .undone {
                 width: 50vw;
                 height: 100px;
-                background: #0f878723;
+                background: #ffffff23;
                 margin: 10px auto;
                 border-radius: inherit;
+                font-size: 20px;
+                font-weight: 700;
+                color: #123;
+                span{
+                    margin-left: 20px;
+                }
             }
 
             .list_box {
                 width: 50vw;
                 height: calc(100vh - 270px);
-                background: #d2bfc746;
+                background: #ffffff8c;
                 margin-bottom: 10px;
                 margin-left: auto;
                 margin-right: auto;
@@ -611,7 +623,7 @@ const pre_list_item = ref(0)
             margin-top: 10px;
             margin-bottom: 10px;
             height: calc(100vh - 160px);
-            background: #d6ffff50;
+            background: #ffffff50;
             border-radius: inherit;
 
             .album_img {
@@ -640,7 +652,6 @@ const pre_list_item = ref(0)
                     left: 50%;
                     border-radius: 3px;
                     top: 50%;
-                    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
                     overflow: hidden;
                     transform: translate(-60%, -50%);
                     box-shadow: #123 2px 3px 10px;
@@ -654,7 +665,7 @@ const pre_list_item = ref(0)
                         top: -120px;
                         transform: rotate(-45deg);
                         background: #4465877b;
-                        transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+                        transition: all 5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
                     }
 
@@ -668,8 +679,8 @@ const pre_list_item = ref(0)
                             top: -120px;
                             transform: rotate(-45deg);
                             transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-                            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.354), transparent);
-                            animation: album_img_cover 2s alternate;
+                            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.148), transparent);
+                            animation: album_img_cover 3s alternate;
                         }
                     }
 
@@ -711,7 +722,7 @@ const pre_list_item = ref(0)
                 .album_name {
                     font-size: 16px;
                     color: #2c4646;
-                    margin: 20px auto;
+                    margin: 20px 20px;
                     font-weight: 700;
 
 
@@ -763,7 +774,7 @@ const pre_list_item = ref(0)
             border-top-left-radius: 1000px;
             height: 5px;
             transition: all .1s cubic-bezier(0.075, 0.82, 0.165, 1);
-
+            overflow: hidden;
             top: -5px;
             background: rgb(252, 253, 253);
             transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -1143,8 +1154,5 @@ const pre_list_item = ref(0)
         right: 200px;
     }
 
-    60% {
-        top: -180px;
-        right: -100px;
-    }
+    
 }</style>

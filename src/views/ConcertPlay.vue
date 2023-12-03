@@ -120,8 +120,8 @@ const program_data = ref([
 
         performanceDetails: [
             { sectionName: ' I. Allegro energico, ma non troppo', sectionTimePosition: '0.0', path: '' },
-            { sectionName: ' II. Wuchtig', sectionTimePosition: '23.51', path: '' },
-            { sectionName: ' III. Andante moderato', sectionTimePosition: '38.48', path: '' },
+            { sectionName: ' II. Andante moderato', sectionTimePosition: '23.51', path: '' },
+            { sectionName: ' III. Scherzo', sectionTimePosition: '38.48', path: '' },
             { sectionName: '  IV. Finale', sectionTimePosition: '51.51', path: '' },
         ],
         showPerformanceDetails: ref(true)
@@ -566,7 +566,7 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
                 width: 6000px;
                 height: 250px;
                 overflow: hidden;
-                transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                transition: all 1.5s cubic-bezier(0.23, 1, 0.320, 1);
 
                 .recommend_item {
                     width: 300px;

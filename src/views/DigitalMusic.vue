@@ -63,7 +63,7 @@ onUnmounted(()=>{
 // 	x:0
 // }
 const album_list_data = ref([
-	{ albumName: 'Mozart: Violin Concerto No. 5', albumImgUrl: '/src/assets/imgs/music_play_bg.png' }
+	{ albumName: 'Mozart: Violin Concerto No. 5 & Sibelius: Violin Concerto, Op. 47', albumImgUrl: '/src/assets/imgs/music_play_bg.png' }
 ]
 )
 const album_recent = ref(
@@ -125,10 +125,12 @@ const click_enter_album = () => {
 			</span>
 			
 			<div class="music_search_box relative" >
-				<input id="music_search" type="text" placeholder="search">
+				<form @submit="">
+					<input id="music_search" type="text" placeholder="search">
 			<label for="music_search" class="absolute">
 				<svg t="1701503390230" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18598" width="32" height="32"><path d="M869.484748 1024a96.009331 96.009331 0 0 1-76.327418-37.923686l-174.736982-228.982254a96.009331 96.009331 0 0 1 152.654836-116.651337l174.736982 228.982254a96.009331 96.009331 0 0 1-76.327418 154.094976z" fill="#7BE0FF" p-id="18599"></path><path d="M770.595138 640.92277a96.009331 96.009331 0 0 0-100.809798-34.563359 240.023327 240.023327 0 0 1-57.605598 65.766391c-3.360327 2.400233-7.2007 4.32042-11.041074 6.720653a96.009331 96.009331 0 0 0 16.801633 79.687745l70.566859 92.649004a432.041989 432.041989 0 0 0 39.843872-26.882612A429.161709 429.161709 0 0 0 826.760596 715.810048z" fill="#ffffff" p-id="18600"></path><path d="M490.727938 864.144464a432.041989 432.041989 0 1 1 261.625427-88.328584A432.041989 432.041989 0 0 1 490.727938 864.144464zM490.727938 192.079148a240.023327 240.023327 0 1 0 192.018662 96.009331 240.023327 240.023327 0 0 0-192.018662-96.009331z" fill="#ffffff" p-id="18601"></path></svg>
 			</label>
+				</form>
 			</div>
 		</div>
 			<div class="recommend_box common_box flex flex-direction-column">

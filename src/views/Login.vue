@@ -154,11 +154,15 @@ const welcome_title_data = [
 'Welcome','Register'
 ] 
 const welcome_title = ref(welcome_title_data[0])
+const login_register = ()=>{
+    
+}
 </script>
 <template>
     <div id="main" class="relative flex flex-direction-column">
         <img  class="main_bg absolute" src="@/assets/imgs/login_bg.jpg" alt="">
-        <div class="login_register_box absolute flex flex-direction-row relative">
+        <form @submit="login_register">
+            <div class="login_register_box absolute flex flex-direction-row relative">
             <div class="absolute over_box flex align-items-center justify-content-center">
                 <span class="absolute">                {{ welcome_title }}</span>
                 <img class="welcome_bg" src="@/assets/imgs/login_welcome.jpg" alt="">
@@ -215,6 +219,7 @@ const welcome_title = ref(welcome_title_data[0])
             </div>
         </div>
         
+        </form>
     </div>
     <div id="foot_box" class=" flex flex-direction-row">
             <div class="contact_box flex flex-direction-column">

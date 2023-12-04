@@ -29,26 +29,25 @@ const scroll_navbar = () => {
 
 	}
 }
+const emit = defineEmits(['change_current_index'])
 const init_nav_active = () => {
 	const active_item_list = document.querySelectorAll('#nav_list li')
 
-	active_item_list[pre_item.value].classList.add('nav_item_active')
+	active_item_list[props.current_index].classList.add('nav_item_active')
 	}
 	
 
 const click_nav_item = (index) => {
-	if(index === pre_item.value)
-	{
-		return
-	}
-	const active_item_list = document.querySelectorAll('#nav_list li')
-	active_item_list[index].classList.add('nav_item_active')
-	active_item_list[pre_item.value].classList.remove('nav_item_active')
-
-	pre_item.value = index
+	
+	
 	router.push(navItem.value[index].routerPath)
 
 	nextTick(() => {
+		emit('change_current_index',index)
+		const active_item_list = document.querySelectorAll('#nav_list li')
+		active_item_list[pre_item.value].classList.remove('nav_item_active')
+	active_item_list[index].classList.add('nav_item_active')
+	pre_item.value = index
 	})
 }
 const to_login = () => {
@@ -57,13 +56,19 @@ const to_login = () => {
 onMounted(() => {
 	document.addEventListener('scroll', scroll_navbar)
 	init_nav_active()
+	console.log(pre_item.value);
 })
 onUnmounted(() => {
 	document.removeEventListener('scroll', scroll_navbar)
 
 })
 const pre_item =ref(0)
-
+const props = defineProps({
+	current_index:{
+		type:Number,
+		default:0
+	}
+})
 </script>
 
 <template>

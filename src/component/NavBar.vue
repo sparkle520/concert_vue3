@@ -43,7 +43,7 @@ const click_nav_item = (index) => {
 	router.push(navItem.value[index].routerPath)
 
 	nextTick(() => {
-		emit('change_current_index',index)
+		// emit('change_current_index',index)
 		const active_item_list = document.querySelectorAll('#nav_list li')
 		active_item_list[pre_item.value].classList.remove('nav_item_active')
 	active_item_list[index].classList.add('nav_item_active')

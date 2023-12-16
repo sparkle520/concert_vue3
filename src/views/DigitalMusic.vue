@@ -14,6 +14,7 @@ onMounted(() => {
 	// recommend_list_box.addEventListener('mousemove',mousemove_recommend)
 	const date = new Date()
 	let hour = date.getHours()
+	
 	if(hour >= 6 && hour < 11){
 		welcome_text.value = '早上好!'
 	}else if(hour >= 11 && hour < 13){
@@ -69,7 +70,7 @@ const album_list_data = ref([
 const album_recent = ref(
 	{
 		albumUrl: '/src/assets/imgs/music_play_bg.png',
-		albumName: 'Mozart: Violin Concerto No. 5',
+		albumName: 'Mozart: Violin Concerto No. 5 & Sibelius: Violin Concerto, Op. 47',
 		albumDate: '2099.09.09'
 	}
 )

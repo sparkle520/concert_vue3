@@ -32,7 +32,7 @@ const init_duration = () => {
 }
 const click_play_film = () => {
     router.push(
-        '/concert/film/play'
+        '/sparkle/film/play'
     )
 }
 const film_recent = ref(

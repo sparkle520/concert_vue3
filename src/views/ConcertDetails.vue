@@ -13,7 +13,6 @@ const show_performance_details = (index) => {
         icon_list[index].style.transform = 'rotate(90deg)'
     } else {
         icon_list[index].style.transform = 'rotate(0deg)'
-
     }
 }
 onBeforeMount(() => {
@@ -21,7 +20,6 @@ onBeforeMount(() => {
 onMounted(() => {
     init_duration()
     window.scrollTo(0,100)
-
 })
 const init_duration = () => {
     for (let i = 0; i < concert_recent_program.value.length; ++i) {
@@ -34,7 +32,7 @@ const init_duration = () => {
 }
 const click_play_concert = () => {
     router.push(
-        '/concert/play'
+        '/sparkle/concert/play'
     )
 }
 const concert_recent = ref(
@@ -57,8 +55,8 @@ const concert_recent_program = ref([
         performancePhilharmonic: 'Lucerne Festival Orchestra ( 琉森音乐节管弦乐团 )',
         performanceDetails: [
             { sectionName: ' I. Allegro energico, ma non troppo', sectionDuration: '21', path: '' },
-            { sectionName: ' II. Wuchtig', sectionDuration: '16', path: '' },
-            { sectionName: ' III. Andante moderato', sectionDuration: '14', path: '' },
+            { sectionName: ' II. Andante moderato', sectionDuration: '16', path: '' },
+            { sectionName: ' III. Scherzo ', sectionDuration: '14', path: '' },
             { sectionName: '  IV. Finale', sectionDuration: '32', path: '' },
         ],
         showPerformanceDetails: ref(false)
@@ -90,11 +88,9 @@ const concert_recent_program = ref([
     },
 ])
 const total_duration = ref(0)
-
 </script>
 <template>
     <div id="main">
-
         <div class="relative top_box">
             <img class="absolute concert_role" :src="concert_recent.concertRole" alt="">
             <img class="absolute concert_bg" :src="concert_recent.concertBg" alt="">

@@ -198,7 +198,6 @@ const concert_live_to_right = () => {
 }
 onMounted(() => {
 	init()
-
 	document.addEventListener('scroll', musician_scroll)
 }
 )
@@ -228,7 +227,7 @@ const musician = ref(
 	}
 )
 const click_enter_concert = () =>{
-	router.push('/concert/details')
+	router.push('/sparkle/concert/details')
 }
 const concert_doc_start = ref(0)
 const concert_doc_end = ref(0)
@@ -255,6 +254,9 @@ const concert_live = ref([
 	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.0 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
 	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.1 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
 	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.2 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
+	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.3 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
+	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.3 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
+	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.3 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
 	{ concertTitle: '小泽征尔指挥 贝多芬交响曲Nos.3 & 7', imgPath: 'src/assets/imgs/conduct_1.png', path: '', concertDate: '2099.01.02', concertType: '直播' },
 
 ])
@@ -302,12 +304,14 @@ const conduct_cycle_scroll = ()=>{
 	if( conduct_cycle_position.value <= -300){
 			conduct_item_list.style.transition = 'none'
 		conduct_item_list.style.transform = 'translateX(0)'
+
+		
 		nextTick(()=>{
-			setTimeout(()=>{
-			conduct_cycle_position.value = -1
+			 setTimeout(()=>{
+			conduct_cycle_position.value = 0
 			conduct_item_list.style.transition = 'all .1s linear'
 			conduct_item_list.style.transform = 'translateX('+conduct_cycle_position.value+ 'vw)'
-		},1)
+		 },1)
 		})
 		
 	}
@@ -1052,7 +1056,7 @@ position: absolute;
 					width: 18vw;
 					margin:  0 auto;
 					border-radius: 3px;
-					box-shadow: #4a3d3d 2px 6px 10px;
+					box-shadow: #0e0c0c 2px 6px 10px;
 
 					height: 200px;
 					background: #ecebeb99;

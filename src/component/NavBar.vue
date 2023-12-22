@@ -6,17 +6,19 @@
  * @version 1.0
 -->
 <script setup>
-import { onMounted, nextTick, onUnmounted, ref } from "vue";
-import { useRoute } from 'vue-router';
+import { onMounted, nextTick, onUnmounted, ref,watch } from "vue";
+import { useRoute ,onBeforeRouteUpdate} from 'vue-router';
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-const navItem = ref([
+const menus = ref([
 	{ name: '音乐会', routerPath: '/home', active: true },
-	{ name: '影片', routerPath: '/concert/film', active: true },
-	{ name: '数字音乐', routerPath: '/concert/digital/music', active: true },
+	{ name: '影片', routerPath: '/sparkle/film', active: true },
+	{ name: '数字音乐', routerPath: '/sparkle/digital/music', active: true },
 ])
+const pre_active_item =ref(-1)
+
 const scroll_navbar = () => {
 	let wScrY = window.scrollY
 	let navBar = document.getElementById('main')
@@ -29,41 +31,74 @@ const scroll_navbar = () => {
 
 	}
 }
+const emit = defineEmits(['change_current_index'])
 const init_nav_active = () => {
-	const active_item_list = document.querySelectorAll('#nav_list li')
+	const nav_list = document.querySelectorAll('#nav_list li')
+	if(pre_active_item.value != -1)
+	nav_list[pre_active_item.value].classList.remove('nav_item_active')
 
-	active_item_list[pre_item.value].classList.add('nav_item_active')
+	nextTick(()=>{
+		switch (active_item.value) {
+		case 'concert':
+		nav_list[0].classList.add('nav_item_active')
+		pre_active_item.value = 0
+			break;
+		case 'film':
+		nav_list[1].classList.add('nav_item_active')
+		pre_active_item.value =1
+			break;
+		case 'digital':
+		nav_list[2].classList.add('nav_item_active')
+		pre_active_item.value = 2
+			break;
+		default:
+			break;
+	}
+	})
+	
 	}
 	
 
 const click_nav_item = (index) => {
-	if(index === pre_item.value)
-	{
-		return
-	}
-	const active_item_list = document.querySelectorAll('#nav_list li')
-	active_item_list[index].classList.add('nav_item_active')
-	active_item_list[pre_item.value].classList.remove('nav_item_active')
+	
+	
+	router.push(menus.value[index].routerPath)
 
-	pre_item.value = index
-	router.push(navItem.value[index].routerPath)
-
-	nextTick(() => {
-	})
+	// nextTick(() => {
+	// 	// emit('change_current_index',index)
+	// 	const active_item_list = document.querySelectorAll('#nav_list li')
+	// 	active_item_list[pre_item.value].classList.remove('nav_item_active')
+	// active_item_list[index].classList.add('nav_item_active')
+	// pre_item.value = index
+	// })
 }
 const to_login = () => {
-	router.push('/concert/login')
+	router.push('/sparkle/login')
 }
 onMounted(() => {
 	document.addEventListener('scroll', scroll_navbar)
-	init_nav_active()
+	active_item.value = route_path.value.split('/')[1] != null && route_path.value.split('/')[1] != undefined ? route_path.value.split('/')[1] : 'concert'
 })
 onUnmounted(() => {
 	document.removeEventListener('scroll', scroll_navbar)
 
 })
-const pre_item =ref(0)
+const  route_path = ref(router.currentRoute.value.path)
+const active_item = ref()
 
+watch(() => router.currentRoute.value.path,(to) => {
+		active_item.value = to.split('/')[2] != null && to.split('/')[2] != undefined ? to.split('/')[2] : 'concert'
+	init_nav_active()
+     },{immediate: true,deep: true})
+	
+
+//const pre_item =ref(0)
+// const props = defineProps({
+// 	current_index:{
+// 		type:Number,
+// 		default:0
+// 	}
+// })
 </script>
 
 <template>
@@ -79,7 +114,7 @@ const pre_item =ref(0)
 			</div>
 			<div class="flex flex-direction-row relative nav_item_box justify-content-center">
 				<ul class="flex flex-direction-row nav_item_box" id="nav_list">
-					<li class="nav_item" v-for="(item, index) in navItem" @click="click_nav_item(index)">
+					<li class="nav_item" v-for="(item, index) in menus" @click="click_nav_item(index)">
 						{{ item.name }}
 					</li>
 				</ul>

@@ -10,12 +10,10 @@ onBeforeMount(() => {
 })
 onUnmounted(() => {
     clearInterval(interval_cycle_scroll)
-    video.removeEventListener('timeupdate', timeupdate_video)
 
 })
 onMounted(() => {
     pre_active_play_node.value = document.querySelectorAll('.program_item span')[0]
-
     pre_active_play_node.value.className = 'performance_details_item_active'
     document.querySelectorAll('.recommend_box div')[0].classList.add('left_btn_doc_limit')
     window.scrollTo(0, 0)
@@ -120,8 +118,8 @@ const program_data = ref([
 
         performanceDetails: [
             { sectionName: ' I. Allegro energico, ma non troppo', sectionTimePosition: '0.0', path: '' },
-            { sectionName: ' II. Wuchtig', sectionTimePosition: '23.51', path: '' },
-            { sectionName: ' III. Andante moderato', sectionTimePosition: '38.48', path: '' },
+            { sectionName: ' II. Andante moderato', sectionTimePosition: '23.51', path: '' },
+            { sectionName: ' III. Scherzo', sectionTimePosition: '38.48', path: '' },
             { sectionName: '  IV. Finale', sectionTimePosition: '51.51', path: '' },
         ],
         showPerformanceDetails: ref(true)
@@ -154,7 +152,6 @@ const recommend_to_left = () => {
     const recommend_container_inner = document.querySelector('.recommend_container_inner')
     if (current_recommend_pos.value >= 0) {
         return
-
     }
     else {
         current_recommend_pos.value += 1200
@@ -220,9 +217,11 @@ watch(current_recommend_pos, (newV, oldV) => {
 
     }
 })
+
 let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
 
 </script>
+
 <template>
     <div id="main">
         <div class="video_box flex flex-direction-row relative">
@@ -278,7 +277,6 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
                         class="relative recommend_item flex flex-direction-column relative align-items-center">
                         <div class="recommend_img_box">
                             <img :src="item.recommendImg" alt="">
-
                         </div>
                         <div class="absolute recommend_title">
                             <span> {{ item.recommendTitle }}
@@ -306,6 +304,7 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
         </div>
     </div>
 </template>
+
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
     width: 0 !important;
@@ -566,7 +565,7 @@ let interval_cycle_scroll = setInterval(cycle_scroll, 2500)
                 width: 6000px;
                 height: 250px;
                 overflow: hidden;
-                transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                transition: all 1.5s cubic-bezier(0.23, 1, 0.320, 1);
 
                 .recommend_item {
                     width: 300px;

@@ -96,7 +96,7 @@ const new_recommend_album_data = ref([
 	{albumUrl: '/src/assets/imgs/album_7.jpg',	albumName: 'Mozart: Violin Concerto No. 5',albumDate: '2099.09.09'},
 ])
 const click_enter_album = () => {
-	router.push('/concert/music/play')
+	router.push('/sparkle/digital/music/play')
 }
 
 </script>

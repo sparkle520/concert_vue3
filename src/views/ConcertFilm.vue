@@ -15,7 +15,7 @@ onMounted(() => {
 
 })
 const click_enter_film = ()=>{
-    router.push('/concert/film/details')
+    router.push('/sparkle/film/details')
 }
 const movie_recent = ref(
 	{

@@ -282,7 +282,6 @@ const change_progress = (e) => {
     const current_progress = document.querySelector('.current_progress')
     current_progress.style.width = e.offsetX / progress_bar_width * 100 + '%'
     music_audio.currentTime = music_audio.duration * e.offsetX / progress_bar_width
-
 }
 let interval_music_name_loop = setInterval(music_name_loop, 500)
 const current_music_name_position = ref(0)
@@ -308,7 +307,6 @@ const window_mousemove = (e) => {
         }
         const music_audio = document.querySelector('.music_audio')
         music_audio.volume = (parseInt(volume_circle.style.bottom) - 50) / 80
-
     }
 
 }
@@ -335,6 +333,7 @@ const switch_current_play = (index) => {
         play_music()
     })
 }
+
 const volume_flag = ref(false)
 const pre_list_item = ref(0)
 </script>
@@ -347,7 +346,6 @@ const pre_list_item = ref(0)
                 <div class="undone flex align-items-center">
                     <span>
                         暂无歌词~
-
                     </span>
                 </div>
                 <div class="list_box flex flex-direction-column">
@@ -564,8 +562,6 @@ const pre_list_item = ref(0)
 
                         &:hover {
                             background: #0d205f0d;
-
-
                         }
 
                         &::after {

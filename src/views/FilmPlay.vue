@@ -28,6 +28,7 @@ const cycle_scroll = () => {
 
     }
     else {
+        
         current_recommend_pos.value -= 1200
         recommend_container_inner.style.transform = 'translateX(' + current_recommend_pos.value + 'px)'
     }

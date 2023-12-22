@@ -227,7 +227,7 @@ const musician = ref(
 	}
 )
 const click_enter_concert = () =>{
-	router.push('/concert/details')
+	router.push('/sparkle/concert/details')
 }
 const concert_doc_start = ref(0)
 const concert_doc_end = ref(0)

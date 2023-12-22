@@ -109,12 +109,14 @@ const to_register = () => {
     cover.style.left = '0'
     welcome_title.value = welcome_title_data[1]
     const cover_span  = document.querySelector('.over_box span')
+    const cover_circle_bottom  = document.querySelector('.circle_bottom')
     cover_span.style.opacity = 0
     setTimeout(()=>{
         cover_span.style.opacity = 1
         cover_span.style.color = '#33e6cc'
         cover_span.style.borderBottom =  '#33e6cc 15px solid'
         cover_span.style.textShadow =  '#4b0080 3px 2px 10px,#30d5c8 2px 2px'
+        cover_circle_bottom.style.background =  "linear-gradient(to top,#292122,90%,transparent)"
 
     },500)
     reset_login_register_user()
@@ -139,8 +141,10 @@ const jump_login = () =>{
     welcome_title.value = welcome_title_data[0]
     const cover_span  = document.querySelector('.over_box span')
     cover_span.style.opacity = 0
+    const cover_circle_bottom  = document.querySelector('.circle_bottom')
     setTimeout(()=>{
         cover_span.style.opacity = 1
+        cover_circle_bottom.style.background =  "linear-gradient(to top,#292122,90%,transparent)"
         cover_span.style.color = '#c2b3ef'
         cover_span.style.borderBottom =  '#c2b3ef 16px solid'
         cover_span.style.textShadow =  '#8e2626 3px 2px 10px,#d7e3fa 2px 2px'
@@ -164,6 +168,11 @@ const login_register = ()=>{
         <form @submit="login_register">
             <div class="login_register_box absolute flex flex-direction-row relative">
             <div class="absolute over_box flex align-items-center justify-content-center">
+                <div class="circle_1 circle"></div>
+                <div class="circle_2 circle"></div>
+                <div class="circle_3 circle"></div>
+                <div class="circle_4 circle"></div>
+                <div class="circle_bottom"></div>
                 <span class="absolute">                {{ welcome_title }}</span>
                 <img class="welcome_bg" src="@/assets/imgs/login_welcome.jpg" alt="">
             </div>
@@ -254,22 +263,60 @@ const login_register = ()=>{
         left: 50%;
         transform: translateX(-50%);
         width: 60vw;
-        height: 440px;
+        border-radius: 40%;
+        height: 400px;
         margin-bottom: 100px;
 
         .over_box{
             width: 30vw;
-            height: 480px;
-            box-shadow: #413d3d 2px 3px 10px;
-            top:50%;
-            border-radius: 10px;
+            height: 30vw;
+            top:40%;
+            border-radius: 50%;
             z-index: 1;
             
             left:50%;
-            overflow: hidden;
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform: translate(0,-50%);
-            background: linear-gradient(45deg,rgb(233, 244, 255),rgb(235, 239, 243));
+            .circle{
+                border-radius: 50%;
+                position: absolute;
+            }
+            .circle_1{
+                width: 100%;
+                height: 100%;
+                background: #2e2b2b;
+                box-shadow: #895d5d 2px 3px 4px;
+            }
+            .circle_2{
+                width: 90%;
+                height: 90%;
+                background: transparent;
+                border: #ffffff solid 2px;
+            }
+            .circle_3{
+                width: 80%;
+                height: 80%;
+                background: transparent;
+                border: #ffffff solid 2px;
+            }
+            .circle_4{
+                width: 70%;
+                height: 70%;
+                background: transparent;
+                border: #ffffff solid 2px;
+            }
+            .circle_bottom{
+                position: absolute;
+                bottom: -40px;
+                border-bottom-left-radius: 29px;
+                border-bottom-right-radius: 29px;
+                width: 100%;
+                height: 200px;
+                transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+                //background: linear-gradient(to top,#ff4d40,90%,transparent);
+                background: linear-gradient(to top,#292122,90%,transparent);
+
+            }
             span{
                 color: #dad0fc;
             font-size: 40px;
@@ -283,10 +330,12 @@ const login_register = ()=>{
                     }
             .welcome_bg{
                 z-index: 0;
-                width: 100%;
+                width: 160px;
+                height: 160px;
                 object-fit: cover;
-                transform: translateY(90px);
-                height: 150%;
+                border-radius: 50%;
+                transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+                animation: circle_animate 10s linear infinite;
             }
         }
         .login_bg {
@@ -296,7 +345,7 @@ const login_register = ()=>{
             position: absolute;
             z-index: -1;
             opacity: .5;
-            border-radius: 10px;
+            border-radius: 40%;
             filter: blur(2px);
         }
 
@@ -407,17 +456,19 @@ const login_register = ()=>{
 
         .common {
             width: 30vw;
-            height: 440px;
+            height: 400px;
         }
 
         .login_box {
-            background: #52207456;
-            border-radius: 10px;
+            background: linear-gradient(to top,#00ced1,90%,transparent);
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
         }
 
         .register_box {
-            background: #48a9a954;
-            border-radius: 10px;
+            background: linear-gradient(to top,#edd65a,90%,transparent);
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
             .input_box{
                 transform: translateY(-30px);
             }
@@ -425,7 +476,7 @@ const login_register = ()=>{
                 background: transparent;
                 border: none;
                 color: #895d5d;
-                margin-top: 30px;
+                margin-top: 20px;
                 span{
                     color: #193e82;
                     text-decoration: underline;
@@ -480,5 +531,13 @@ const login_register = ()=>{
 
     }
 
+}
+@keyframes circle_animate {
+    0%{
+        transform: rotate(0);
+    }100%{
+        transform: rotate(360deg);
+
+    }
 }
 </style>
